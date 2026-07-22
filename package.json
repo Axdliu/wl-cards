@@ -1,0 +1,38 @@
+{
+  "name": "worldline-card-monorepo",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Collectible trading-card UI for React Native",
+  "packageManager": "pnpm@10.30.3",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Axdliu/wl-cards.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Axdliu/wl-cards/issues"
+  },
+  "homepage": "https://github.com/Axdliu/wl-cards#readme",
+  "scripts": {
+    "build": "pnpm --filter worldline-card build",
+    "typecheck": "pnpm -r typecheck",
+    "example": "pnpm --filter worldline-card-example start",
+    "example:ios": "pnpm --filter worldline-card-example ios",
+    "example:android": "pnpm --filter worldline-card-example android",
+    "example:web": "pnpm --filter worldline-card-example web",
+    "example:export-web": "pnpm --filter worldline-card-example export:web"
+  },
+  "keywords": [
+    "react-native",
+    "trading-card",
+    "collectible",
+    "tcg",
+    "holographic",
+    "tilt",
+    "reanimated"
+  ],
+  "author": "Worldline Card Contributors",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  }
+}
