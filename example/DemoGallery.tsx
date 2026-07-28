@@ -8,7 +8,7 @@ import {
 } from 'worldline-card';
 
 const ART = {
-  spiderman: require('./assets/cards/spiderman.png'),
+  spiderman: require('./assets/cards/spiderman-v2.png'),
   suntzu: require('./assets/cards/suntzu.png'),
   link: require('./assets/cards/selda.png'),
   hermione: require('./assets/cards/harryporter.png'),
