@@ -1,16 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Platform, StyleSheet, Text, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import {
-  CollectibleCard,
-  CardArt,
-  CardChips,
-  CardFlavor,
-  CardFooter,
-  CardHeader,
-  CardMetaText,
-  CardStatList,
-  CardTitle,
   StatCollectibleCard,
   type CardStat,
   type CardChipInput,
@@ -21,6 +12,8 @@ const ART = {
   suntzu: require('./assets/cards/suntzu.png'),
   link: require('./assets/cards/selda.png'),
   hermione: require('./assets/cards/harryporter.png'),
+  ada: require('./assets/cards/ada.png'),
+  ash: require('./assets/cards/ash.png'),
 };
 
 const SPIDER_STATS: CardStat[] = [
@@ -89,7 +82,9 @@ export function DemoGallery({ compactChrome = false }: DemoGalleryProps) {
     <View style={styles.screen}>
       {!compactChrome ? (
         <>
-          <Text style={styles.heading}>worldline-card</Text>
+          <Text style={styles.heading}>
+            WORLDLINE{'\n'}-CARD
+          </Text>
           <Text style={styles.subheading}>
             Tap a dotted trait or underlined stat for an explanation. Drag the
             foil card to tilt.
@@ -107,6 +102,7 @@ export function DemoGallery({ compactChrome = false }: DemoGalleryProps) {
         <StatCollectibleCard
           interactive
           holo="legendary"
+          cardStyle="crimson"
           title="Spider-Man"
           artSource={ART.spiderman}
           badge={{
@@ -123,85 +119,121 @@ export function DemoGallery({ compactChrome = false }: DemoGalleryProps) {
           active
         />
 
-        <Text style={styles.section}>Composable card</Text>
-        <CollectibleCard>
-          <CardHeader
-            badge={{
-              label: 'History',
-              color: '#4a5568',
-              description: 'Drawn from historical / legendary sources.',
-            }}
-            trailing={<CardMetaText>PWR 42</CardMetaText>}
-          />
-          <CardArt imageSource={ART.suntzu} caption="History" />
-          <CardTitle title="Sun Tzu" />
-          <CardChips
-            items={[
-              {
-                label: 'Strategic',
-                description: 'Wins by positioning before the clash.',
-              },
-              {
-                label: 'Calm',
-                description: 'Rarely rattled; keeps the board readable.',
-              },
-            ]}
-          />
-          <CardStatList
-            stats={[
-              {
-                label: 'Strategy',
-                value: 10,
-                description: 'Mastery of tempo, terrain, and force multipliers.',
-              },
-              {
-                label: 'Insight',
-                value: 9,
-                description: 'Sees the opponent’s plan two moves early.',
-              },
-              {
-                label: 'Composure',
-                value: 9,
-                description: 'Keeps clarity when the field turns chaotic.',
-              },
-            ]}
-          />
-          <CardFlavor text="Victory is decided before the battle is fought." />
-          <CardFooter
-            left={<CardMetaText>Expr 4/10</CardMetaText>}
-            right={null}
-          />
-        </CollectibleCard>
+        <Text style={styles.section}>Card styles</Text>
+        <StatCollectibleCard
+          interactive
+          holo="rare"
+          cardStyle="amber"
+          title="Sun Tzu"
+          artSource={ART.suntzu}
+          badge={{
+            label: 'History',
+            color: '#8a6a2a',
+            description: 'Drawn from historical / legendary sources.',
+          }}
+          franchise="History"
+          chips={[
+            {
+              label: 'Strategic',
+              description: 'Wins by positioning before the clash.',
+            },
+            {
+              label: 'Calm',
+              description: 'Rarely rattled; keeps the board readable.',
+            },
+          ]}
+          stats={[
+            {
+              label: 'Strategy',
+              value: 10,
+              description: 'Mastery of tempo, terrain, and force multipliers.',
+            },
+            {
+              label: 'Insight',
+              value: 9,
+              description: 'Sees the opponent’s plan two moves early.',
+            },
+            {
+              label: 'Composure',
+              value: 9,
+              description: 'Keeps clarity when the field turns chaotic.',
+            },
+          ]}
+          flavor="Victory is decided before the battle is fought."
+          footerLeft="Expr 4/10"
+        />
 
-        <View style={styles.grid}>
-          <StatCollectibleCard
-            compact
-            title="Link"
-            artSource={ART.link}
-            badge={{ label: 'Game', color: '#2a5f54' }}
-            franchise="Zelda"
-            chips={['Brave']}
-            stats={[
-              { label: 'Boldness', value: 9 },
-              { label: 'Strategy', value: 6 },
-              { label: 'Composure', value: 7 },
-            ]}
-            flavor="It's dangerous to go alone."
-          />
-          <StatCollectibleCard
-            compact
-            title="Hermione"
-            artSource={ART.hermione}
-            badge={{ label: 'Film', color: '#5c4a6e' }}
-            franchise="Harry Potter"
-            chips={['Clever', 'Loyal']}
-            stats={[
-              { label: 'Insight', value: 9 },
-              { label: 'Strategy', value: 8 },
-              { label: 'Charisma', value: 6 },
-            ]}
-          />
-        </View>
+        <StatCollectibleCard
+          interactive
+          holo="rare"
+          cardStyle="forest"
+          title="Link"
+          artSource={ART.link}
+          badge={{ label: 'Game', color: '#2a5f54' }}
+          franchise="Zelda"
+          chips={['Brave']}
+          stats={[
+            { label: 'Boldness', value: 9 },
+            { label: 'Strategy', value: 6 },
+            { label: 'Composure', value: 7 },
+          ]}
+          flavor="It's dangerous to go alone."
+        />
+        <StatCollectibleCard
+          interactive
+          holo="legendary"
+          cardStyle="royal"
+          title="Hermione"
+          artSource={ART.hermione}
+          badge={{ label: 'Film', color: '#5c4a6e' }}
+          franchise="Harry Potter"
+          chips={['Clever', 'Loyal']}
+          stats={[
+            { label: 'Insight', value: 9 },
+            { label: 'Strategy', value: 8 },
+            { label: 'Charisma', value: 6 },
+          ]}
+        />
+        <StatCollectibleCard
+          interactive
+          holo="common"
+          cardStyle="ocean"
+          title="Ada"
+          artSource={ART.ada}
+          badge={{ label: 'Science', color: '#2a6f8f' }}
+          franchise="Computing"
+          chips={[
+            {
+              label: 'Analytical',
+              description: 'Turns messy systems into clear models.',
+            },
+            'Visionary',
+          ]}
+          stats={[
+            { label: 'Insight', value: 10, description: 'Sees patterns others miss.' },
+            { label: 'Strategy', value: 9 },
+            { label: 'Charisma', value: 6 },
+          ]}
+          flavor="The Analytical Engine weaves algebraic patterns."
+          footerLeft="Expr 9/10"
+        />
+        <StatCollectibleCard
+          interactive
+          holo="rare"
+          cardStyle="classic"
+          title="Ash"
+          artSource={ART.ash}
+          badge={{ label: 'Anime', color: '#c9a227' }}
+          franchise="Pokémon"
+          chips={['Optimistic', 'Loyal']}
+          stats={[
+            { label: 'Boldness', value: 8 },
+            { label: 'Charisma', value: 7 },
+            { label: 'Composure', value: 4 },
+          ]}
+          flavor="I wanna be the very best."
+          footerLeft="Expr 5/10"
+        />
       </ScrollView>
     </View>
   );
@@ -215,9 +247,16 @@ const styles = StyleSheet.create({
   },
   heading: {
     color: '#e8eef4',
-    fontSize: 22,
-    fontWeight: '800',
+    fontSize: 28,
+    fontWeight: '900',
     marginTop: 8,
+    lineHeight: 28,
+    letterSpacing: 1,
+    ...(Platform.OS === 'web'
+      ? {
+          fontFamily: '"Big Shoulders Display", "Arial Narrow", sans-serif',
+        }
+      : null),
   },
   subheading: {
     color: '#8b9aab',
@@ -247,9 +286,5 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
     marginBottom: 8,
     marginTop: 8,
-  },
-  grid: {
-    flexDirection: 'row',
-    marginHorizontal: -6,
   },
 });

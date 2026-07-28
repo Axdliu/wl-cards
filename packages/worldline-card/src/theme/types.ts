@@ -8,8 +8,12 @@ export type CardTheme = {
   accent: string;
   statHigh: string;
   statLow: string;
+  /** Outer frame thickness (physical card feel). Default 2 */
+  frameWidth?: number;
+  shadowColor?: string;
 };
 
+/** Default app chrome stays dark; individual cards should prefer a `cardStyle`. */
 export const defaultCardTheme: CardTheme = {
   bg: '#0f1419',
   surface: '#1a222c',
@@ -20,6 +24,8 @@ export const defaultCardTheme: CardTheme = {
   accent: '#3d8b7a',
   statHigh: '#6bc4a6',
   statLow: '#c45c5c',
+  frameWidth: 2,
+  shadowColor: '#000',
 };
 
 export type HoloVariant = 'none' | 'common' | 'rare' | 'legendary';

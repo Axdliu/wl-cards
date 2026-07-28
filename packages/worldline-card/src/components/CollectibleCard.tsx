@@ -33,12 +33,15 @@ export function CollectibleCard({
   testID,
 }: CollectibleCardProps) {
   const theme = useCardTheme();
+  const frameWidth = theme.frameWidth ?? 2;
 
   const cardStyle = [
     styles.card,
     {
       backgroundColor: theme.surface,
       borderColor: selected || active ? theme.accent : theme.border,
+      borderWidth: frameWidth,
+      shadowColor: theme.shadowColor ?? '#000',
     },
     compact && styles.cardCompact,
     (selected || active) && styles.cardHighlighted,
@@ -76,14 +79,12 @@ const styles = StyleSheet.create({
   press: { marginBottom: 14 },
   pressCompact: { flex: 1, margin: 6 },
   card: {
-    borderRadius: 16,
-    borderWidth: 2,
-    padding: 14,
-    shadowColor: '#000',
-    shadowOpacity: 0.22,
-    shadowRadius: 10,
-    shadowOffset: { width: 0, height: 5 },
-    elevation: 6,
+    borderRadius: 14,
+    padding: 12,
+    shadowOpacity: 0.28,
+    shadowRadius: 12,
+    shadowOffset: { width: 0, height: 6 },
+    elevation: 7,
     overflow: 'hidden',
   },
   cardCompact: {
@@ -91,7 +92,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
   },
   cardHighlighted: {
-    shadowOpacity: 0.35,
-    shadowRadius: 14,
+    shadowOpacity: 0.4,
+    shadowRadius: 16,
   },
 });

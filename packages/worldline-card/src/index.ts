@@ -36,6 +36,19 @@ export type { StatCollectibleCardProps } from './components/StatCollectibleCard'
 export { CardThemeProvider, useCardTheme } from './theme/CardThemeContext';
 export type { CardThemeProviderProps } from './theme/CardThemeContext';
 
+export {
+  CARD_STYLE_IDS,
+  cardStyles,
+  classicCardStyle,
+  crimsonCardStyle,
+  forestCardStyle,
+  royalCardStyle,
+  oceanCardStyle,
+  amberCardStyle,
+  resolveCardStyle,
+} from './theme/cardStyles';
+export type { CardStyleId, CardStylePreset } from './theme/cardStyles';
+
 export { defaultCardTheme } from './theme/types';
 export type {
   CardArtSource,

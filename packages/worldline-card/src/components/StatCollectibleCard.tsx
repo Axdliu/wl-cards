@@ -6,6 +6,11 @@ import type {
   CardStat,
   HoloVariant,
 } from '../theme/types';
+import {
+  resolveCardStyle,
+  type CardStyleId,
+} from '../theme/cardStyles';
+import { CardThemeProvider } from '../theme/CardThemeContext';
 import { initialFromTitle, sumStatPower } from '../utils/stats';
 import { CollectibleCard } from './CollectibleCard';
 import {
@@ -40,6 +45,11 @@ export type StatCollectibleCardProps = {
   compact?: boolean;
   active?: boolean;
   selected?: boolean;
+  /**
+   * Physical trading-card look (`classic` | `crimson` | `forest` | `royal` | `ocean` | `amber`).
+   * Overrides the ambient CardTheme for this card only.
+   */
+  cardStyle?: CardStyleId;
   /** Wrap with touch tilt + holo overlay */
   interactive?: boolean;
   holo?: HoloVariant;
@@ -65,12 +75,14 @@ export function StatCollectibleCard({
   compact = false,
   active = false,
   selected = false,
+  cardStyle = 'classic',
   interactive = false,
   holo = 'rare',
   onPress,
 }: StatCollectibleCardProps) {
   const power = sumStatPower(stats);
   const initial = initialFromTitle(title);
+  const preset = resolveCardStyle(cardStyle);
 
   const body = (
     <CollectibleCard
@@ -79,13 +91,6 @@ export function StatCollectibleCard({
       selected={selected}
       bare={interactive}
       onPress={interactive ? undefined : onPress}
-      style={
-        holo === 'legendary'
-          ? { borderColor: '#d4a017', shadowColor: '#ffb830', shadowOpacity: 0.45 }
-          : holo === 'rare'
-            ? { borderColor: '#8b6cc9' }
-            : undefined
-      }
     >
       <CardHeader
         badge={badge}
@@ -126,14 +131,20 @@ export function StatCollectibleCard({
     </CollectibleCard>
   );
 
+  const themed = preset ? (
+    <CardThemeProvider theme={preset}>{body}</CardThemeProvider>
+  ) : (
+    body
+  );
+
   if (!interactive) {
-    return body;
+    return themed;
   }
 
   return (
     <View style={styles.interactiveWrap}>
       <TiltCard holo={holo} onPress={onPress} disabled={!onPress && holo === 'none'}>
-        {body}
+        {themed}
       </TiltCard>
     </View>
   );

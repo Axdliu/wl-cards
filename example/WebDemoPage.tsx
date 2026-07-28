@@ -26,13 +26,13 @@ const PHONE_H = 780;
 function useWebFonts() {
   useEffect(() => {
     if (Platform.OS !== 'web' || typeof document === 'undefined') return;
-    const id = 'worldline-card-fonts';
+    const id = 'worldline-card-fonts-v2';
     if (document.getElementById(id)) return;
     const link = document.createElement('link');
     link.id = id;
     link.rel = 'stylesheet';
     link.href =
-      'https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&display=swap';
+      'https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=IBM+Plex+Sans:wght@400;500;600&display=swap';
     document.head.appendChild(link);
   }, []);
 }
@@ -100,7 +100,9 @@ export function WebDemoPage() {
 
       <View style={[styles.layout, narrow && styles.layoutStack]}>
         <Animated.View style={[styles.copy, introStyle, narrow && styles.copyNarrow]}>
-          <Text style={styles.brand}>worldline-card</Text>
+          <Text style={styles.brand}>
+            WORLDLINE{'\n'}-CARD
+          </Text>
           <Text style={styles.tagline}>
             Collectible card UI for React Native — tilt, foil shine, composable
             parts.
@@ -226,12 +228,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   brand: {
-    fontFamily: Platform.OS === 'web' ? 'Syne, system-ui' : undefined,
-    fontSize: 52,
-    fontWeight: '800',
-    letterSpacing: -1.4,
+    fontFamily:
+      Platform.OS === 'web'
+        ? '"Big Shoulders Display", "Arial Narrow", sans-serif'
+        : undefined,
+    fontSize: 83,
+    fontWeight: '900',
+    letterSpacing: 1,
     color: '#f2f6f4',
-    lineHeight: 56,
+    lineHeight: 75,
+    textTransform: 'uppercase',
   },
   tagline: {
     fontFamily: Platform.OS === 'web' ? 'IBM Plex Sans, system-ui' : undefined,
@@ -263,10 +269,14 @@ const styles = StyleSheet.create({
     opacity: 0.88,
   },
   btnPrimaryText: {
-    fontFamily: Platform.OS === 'web' ? 'Syne, system-ui' : undefined,
+    fontFamily:
+      Platform.OS === 'web'
+        ? '"Big Shoulders Display", "Arial Narrow", sans-serif'
+        : undefined,
     color: '#141008',
-    fontWeight: '700',
-    fontSize: 15,
+    fontWeight: '800',
+    fontSize: 16,
+    letterSpacing: 0.6,
   },
   codeChip: {
     backgroundColor: 'rgba(18, 28, 26, 0.9)',
