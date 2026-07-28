@@ -2,6 +2,10 @@
 
 Open-source **React Native** components for **collectible / trading-card** UIs — framed stat cards, composable slots, **realistic touch tilt**, **holo shine**, **Skia foil finishes**, and **AmbientKit-inspired living backgrounds**.
 
+[![Live Demo](https://img.shields.io/badge/demo-live-3d8b7a)](https://worldline-card-demo.vercel.app)
+
+[GitHub](https://github.com/Axdliu/wl-cards) · [Live Demo](https://worldline-card-demo.vercel.app)
+
 Inspired by TCG-style layouts and the character card UI from [Worldline](https://github.com/worldline-dev/worldline-app). Ambient motion draws from [AmbientKit](https://github.com/Axdliu/AmbientKit).
 
 ## Features
@@ -151,9 +155,11 @@ pnpm typecheck
 
 ### Web demo
 
-`pnpm example:web` opens a docs-style landing page with the live card gallery inside a phone bezel — tilt, foil, and ambient styles without a simulator. Export with `pnpm example:export-web` (output under `example/dist`).
+**Live:** [worldline-card-demo.vercel.app](https://worldline-card-demo.vercel.app)
 
-On native, the same gallery runs full-screen via `DemoGallery`.
+`pnpm example:web` opens the same docs-style landing page locally (phone bezel + gallery). Export a static site with `pnpm example:export-web` (output under `example/dist`) for Vercel or any static host.
+
+On native, the gallery runs full-screen via `DemoGallery`.
 
 ## Relationship to Worldline
 

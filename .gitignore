@@ -19,3 +19,5 @@ android/
 .env.local
 coverage/
 .turbo/
+.vercel/
+

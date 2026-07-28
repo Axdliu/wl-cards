@@ -19,7 +19,8 @@
     "example:ios": "pnpm --filter worldline-card-example ios",
     "example:android": "pnpm --filter worldline-card-example android",
     "example:web": "pnpm --filter worldline-card-example web",
-    "example:export-web": "pnpm --filter worldline-card-example export:web"
+    "example:export-web": "pnpm --filter worldline-card-example export:web",
+    "example:deploy-web": "pnpm example:export-web && cp example/vercel.json example/dist/vercel.json && cd example/dist && vercel deploy --prod --yes --archive=tgz"
   },
   "keywords": [
     "react-native",

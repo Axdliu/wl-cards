@@ -19,7 +19,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { DemoGallery } from './DemoGallery';
 
-const GITHUB = 'https://github.com/worldline-dev/worldline-card';
+const GITHUB = 'https://github.com/Axdliu/wl-cards';
 const PHONE_W = 390;
 const PHONE_H = 780;
 
