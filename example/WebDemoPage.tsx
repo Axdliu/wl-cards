@@ -236,7 +236,7 @@ const styles = StyleSheet.create({
     fontWeight: '900',
     letterSpacing: 1,
     color: '#f2f6f4',
-    lineHeight: 75,
+    lineHeight: 96,
     textTransform: 'uppercase',
   },
   tagline: {
