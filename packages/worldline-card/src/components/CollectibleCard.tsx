@@ -8,6 +8,7 @@ import {
   type ViewStyle,
 } from 'react-native';
 import { useCardTheme } from '../theme/CardThemeContext';
+import { CardAmbientOverlay, type AmbientKind } from './CardAmbientOverlay';
 import { CardExplainHost } from './CardExplain';
 import { CardMetalOverlay, type MetalKind } from './CardMetalOverlay';
 
@@ -27,6 +28,10 @@ export type CollectibleCardProps = {
   metal?: MetalKind | null;
   /** Optional foil texture image used as a shade over the card */
   metalTexture?: ImageSourcePropType;
+  /**
+   * Force an AmbientKit-style living backdrop. If omitted, uses `theme.ambient`.
+   */
+  ambient?: AmbientKind | null;
   testID?: string;
 };
 
@@ -40,17 +45,22 @@ export function CollectibleCard({
   bare = false,
   metal,
   metalTexture,
+  ambient,
   testID,
 }: CollectibleCardProps) {
   const theme = useCardTheme();
   const frameWidth = theme.frameWidth ?? 2;
   const metalKind =
     metal === null ? undefined : (metal ?? (theme as { metal?: MetalKind }).metal);
+  const ambientKind =
+    ambient === null
+      ? undefined
+      : (ambient ?? (theme as { ambient?: AmbientKind }).ambient);
 
   const cardStyle = [
     styles.card,
     {
-      backgroundColor: theme.surface,
+      backgroundColor: ambientKind ? theme.bg : theme.surface,
       borderColor: selected || active ? theme.accent : theme.border,
       borderWidth: frameWidth,
       shadowColor: theme.shadowColor ?? '#000',
@@ -62,6 +72,7 @@ export function CollectibleCard({
 
   const inner = (
     <View style={cardStyle} testID={testID}>
+      {ambientKind ? <CardAmbientOverlay kind={ambientKind} /> : null}
       {metalKind ? (
         <CardMetalOverlay kind={metalKind} texture={metalTexture} />
       ) : null}

@@ -28,6 +28,9 @@ export type { CardExplainPayload } from './components/CardExplain';
 export { CardMetalOverlay } from './components/CardMetalOverlay';
 export type { MetalKind } from './components/CardMetalOverlay';
 
+export { CardAmbientOverlay } from './components/CardAmbientOverlay';
+export type { AmbientKind } from './components/CardAmbientOverlay';
+
 export { TiltCard } from './components/TiltCard';
 export type { TiltCardProps } from './components/TiltCard';
 
@@ -52,6 +55,10 @@ export {
   diamondCardStyle,
   matteCardStyle,
   obsidianCardStyle,
+  auroraCardStyle,
+  cosmicCardStyle,
+  emberCardStyle,
+  tideCardStyle,
   resolveCardStyle,
 } from './theme/cardStyles';
 export type { CardStyleId, CardStylePreset } from './theme/cardStyles';

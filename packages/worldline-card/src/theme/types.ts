@@ -13,6 +13,8 @@ export type CardTheme = {
   shadowColor?: string;
   /** When set, CollectibleCard paints a foil / finish wash */
   metal?: 'gold' | 'silver' | 'laser' | 'diamond' | 'matte' | 'obsidian';
+  /** Living AmbientKit-style backdrop (drifting orbs / stars) */
+  ambient?: 'aurora' | 'magic' | 'ember' | 'ocean';
 };
 
 /** Default app chrome stays dark; individual cards should prefer a `cardStyle`. */

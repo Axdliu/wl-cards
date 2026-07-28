@@ -27,13 +27,27 @@ function useWebFonts() {
   useEffect(() => {
     if (Platform.OS !== 'web' || typeof document === 'undefined') return;
     const id = 'worldline-card-fonts-v2';
-    if (document.getElementById(id)) return;
-    const link = document.createElement('link');
-    link.id = id;
-    link.rel = 'stylesheet';
-    link.href =
-      'https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=IBM+Plex+Sans:wght@400;500;600&display=swap';
-    document.head.appendChild(link);
+    if (!document.getElementById(id)) {
+      const link = document.createElement('link');
+      link.id = id;
+      link.rel = 'stylesheet';
+      link.href =
+        'https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=IBM+Plex+Sans:wght@400;500;600&display=swap';
+      document.head.appendChild(link);
+    }
+
+    const animId = 'worldline-card-ambient-anim';
+    if (!document.getElementById(animId)) {
+      const style = document.createElement('style');
+      style.id = animId;
+      style.textContent = `
+        @keyframes wlAmbientDrift {
+          0% { background-position: 0% 40%; }
+          100% { background-position: 100% 60%; }
+        }
+      `;
+      document.head.appendChild(style);
+    }
   }, []);
 }
 

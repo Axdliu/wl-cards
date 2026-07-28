@@ -238,6 +238,171 @@ export function DemoGallery({ compactChrome = false }: DemoGalleryProps) {
           flavor="I wanna be the very best."
           footerLeft="STYLE · OBSIDIAN"
         />
+
+        <Text style={styles.section}>More styles</Text>
+        <StatCollectibleCard
+          interactive
+          cardStyle="classic"
+          title="Spider-Man"
+          artSource={ART.spiderman}
+          badge={{ label: 'Comic', color: '#c9a227' }}
+          franchise="Marvel"
+          chips={['Witty', 'Loyal']}
+          stats={[
+            { label: 'Boldness', value: 8 },
+            { label: 'Insight', value: 7 },
+            { label: 'Charisma', value: 6 },
+          ]}
+          flavor="With great power comes great responsibility."
+          footerLeft="STYLE · CLASSIC"
+        />
+        <StatCollectibleCard
+          interactive
+          cardStyle="forest"
+          title="Link"
+          artSource={ART.link}
+          badge={{ label: 'Game', color: '#2a5f54' }}
+          franchise="Zelda"
+          chips={['Brave', 'Quiet']}
+          stats={[
+            { label: 'Boldness', value: 9 },
+            { label: 'Strategy', value: 6 },
+            { label: 'Composure', value: 7 },
+          ]}
+          flavor="It's dangerous to go alone."
+          footerLeft="STYLE · FOREST"
+        />
+        <StatCollectibleCard
+          interactive
+          cardStyle="royal"
+          title="Hermione"
+          artSource={ART.hermione}
+          badge={{ label: 'Film', color: '#6b4ea3' }}
+          franchise="Harry Potter"
+          chips={['Clever', 'Loyal']}
+          stats={[
+            { label: 'Insight', value: 9 },
+            { label: 'Strategy', value: 8 },
+            { label: 'Charisma', value: 6 },
+          ]}
+          flavor="Books and cleverness."
+          footerLeft="STYLE · ROYAL"
+        />
+        <StatCollectibleCard
+          interactive
+          cardStyle="ocean"
+          title="Ada"
+          artSource={ART.ada}
+          badge={{ label: 'Science', color: '#2a6f8f' }}
+          franchise="Computing"
+          chips={['Analytical', 'Visionary']}
+          stats={[
+            { label: 'Insight', value: 10 },
+            { label: 'Strategy', value: 9 },
+            { label: 'Charisma', value: 6 },
+          ]}
+          flavor="The Analytical Engine weaves algebraic patterns."
+          footerLeft="STYLE · OCEAN"
+        />
+        <StatCollectibleCard
+          interactive
+          cardStyle="amber"
+          title="Sun Tzu"
+          artSource={ART.suntzu}
+          badge={{ label: 'History', color: '#a67c2d' }}
+          franchise="History"
+          chips={['Strategic', 'Calm']}
+          stats={[
+            { label: 'Strategy', value: 10 },
+            { label: 'Insight', value: 9 },
+            { label: 'Composure', value: 9 },
+          ]}
+          flavor="Victory is decided before the battle is fought."
+          footerLeft="STYLE · AMBER"
+        />
+        <StatCollectibleCard
+          interactive
+          cardStyle="silver"
+          metalTexture={METAL.gold}
+          title="Ash"
+          artSource={ART.ash}
+          badge={{ label: 'Anime', color: '#5a6570' }}
+          franchise="Pokémon"
+          chips={['Optimistic', 'Loyal']}
+          stats={[
+            { label: 'Boldness', value: 8 },
+            { label: 'Charisma', value: 7 },
+            { label: 'Composure', value: 4 },
+          ]}
+          flavor="I wanna be the very best."
+          footerLeft="STYLE · SILVER"
+        />
+
+        <Text style={styles.section}>Ambient backgrounds</Text>
+        <StatCollectibleCard
+          interactive
+          cardStyle="aurora"
+          title="Spider-Man"
+          artSource={ART.spiderman}
+          badge={{ label: 'Comic', color: '#7b2ff7' }}
+          franchise="Marvel"
+          chips={['Witty', 'Loyal']}
+          stats={[
+            { label: 'Boldness', value: 8 },
+            { label: 'Insight', value: 7 },
+            { label: 'Volatility', value: 7 },
+          ]}
+          flavor="With great power comes great responsibility."
+          footerLeft="STYLE · AURORA"
+        />
+        <StatCollectibleCard
+          interactive
+          cardStyle="cosmic"
+          title="Ada"
+          artSource={ART.ada}
+          badge={{ label: 'Science', color: '#e040fb' }}
+          franchise="Computing"
+          chips={['Analytical', 'Visionary']}
+          stats={[
+            { label: 'Insight', value: 10 },
+            { label: 'Strategy', value: 9 },
+            { label: 'Charisma', value: 6 },
+          ]}
+          flavor="The Analytical Engine weaves algebraic patterns."
+          footerLeft="STYLE · COSMIC"
+        />
+        <StatCollectibleCard
+          interactive
+          cardStyle="ember"
+          title="Sun Tzu"
+          artSource={ART.suntzu}
+          badge={{ label: 'History', color: '#ff6b35' }}
+          franchise="History"
+          chips={['Strategic', 'Calm']}
+          stats={[
+            { label: 'Strategy', value: 10 },
+            { label: 'Insight', value: 9 },
+            { label: 'Composure', value: 9 },
+          ]}
+          flavor="Victory is decided before the battle is fought."
+          footerLeft="STYLE · EMBER"
+        />
+        <StatCollectibleCard
+          interactive
+          cardStyle="tide"
+          title="Link"
+          artSource={ART.link}
+          badge={{ label: 'Game', color: '#4fc3f7' }}
+          franchise="Zelda"
+          chips={['Brave', 'Quiet']}
+          stats={[
+            { label: 'Boldness', value: 9 },
+            { label: 'Strategy', value: 6 },
+            { label: 'Composure', value: 7 },
+          ]}
+          flavor="It's dangerous to go alone."
+          footerLeft="STYLE · TIDE"
+        />
       </ScrollView>
     </View>
   );

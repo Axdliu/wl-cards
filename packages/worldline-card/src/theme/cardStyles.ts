@@ -22,7 +22,15 @@ export type CardStyleId =
   /** Soft velvet matte paper — no gloss */
   | 'matte'
   /** Deep black glass */
-  | 'obsidian';
+  | 'obsidian'
+  /** AmbientKit aurora — drifting screen-blended glow bands */
+  | 'aurora'
+  /** AmbientKit cosmic / magic — orbs, stars, vignette */
+  | 'cosmic'
+  /** AmbientKit ember — warm fire glow */
+  | 'ember'
+  /** AmbientKit ocean mood — deep blue drift (distinct from paper `ocean`) */
+  | 'tide';
 
 export const CARD_STYLE_IDS: CardStyleId[] = [
   'classic',
@@ -37,6 +45,10 @@ export const CARD_STYLE_IDS: CardStyleId[] = [
   'diamond',
   'matte',
   'obsidian',
+  'aurora',
+  'cosmic',
+  'ember',
+  'tide',
 ];
 
 export type CardStylePreset = CardTheme & {
@@ -46,6 +58,8 @@ export type CardStylePreset = CardTheme & {
   shadowColor: string;
   /** Foil / finish wash (Skia shader; CSS / bands fallback) */
   metal?: 'gold' | 'silver' | 'laser' | 'diamond' | 'matte' | 'obsidian';
+  /** Living AmbientKit-style backdrop */
+  ambient?: 'aurora' | 'magic' | 'ember' | 'ocean';
 };
 
 /** Cream stock + gold frame — classic TCG energy */
@@ -234,6 +248,70 @@ export const obsidianCardStyle: CardStylePreset = {
   metal: 'obsidian',
 };
 
+/** AmbientKit aurora — living green/violet glow bands */
+export const auroraCardStyle: CardStylePreset = {
+  bg: '#0f0c29',
+  surface: 'transparent',
+  surfaceAlt: 'rgba(36, 36, 62, 0.55)',
+  border: '#7b2ff7',
+  text: '#eef4ff',
+  textMuted: '#a8b0d0',
+  accent: '#00d2ff',
+  statHigh: '#5ef0c8',
+  statLow: '#ff6b9d',
+  frameWidth: 5,
+  shadowColor: '#302b63',
+  ambient: 'aurora',
+};
+
+/** AmbientKit cosmic / magic — stars + magenta orbs */
+export const cosmicCardStyle: CardStylePreset = {
+  bg: '#0b0014',
+  surface: 'transparent',
+  surfaceAlt: 'rgba(26, 0, 51, 0.55)',
+  border: '#e040fb',
+  text: '#f5e8ff',
+  textMuted: '#b090c8',
+  accent: '#00e5ff',
+  statHigh: '#80ffd0',
+  statLow: '#ff6090',
+  frameWidth: 5,
+  shadowColor: '#4a0080',
+  ambient: 'magic',
+};
+
+/** AmbientKit ember — warm fire drift */
+export const emberCardStyle: CardStylePreset = {
+  bg: '#1a0a00',
+  surface: 'transparent',
+  surfaceAlt: 'rgba(58, 18, 0, 0.55)',
+  border: '#ff6b35',
+  text: '#fff4e8',
+  textMuted: '#c8a080',
+  accent: '#ffd700',
+  statHigh: '#ffe066',
+  statLow: '#ff4500',
+  frameWidth: 5,
+  shadowColor: '#ff4500',
+  ambient: 'ember',
+};
+
+/** AmbientKit ocean mood — deep blue living tide */
+export const tideCardStyle: CardStylePreset = {
+  bg: '#0a1628',
+  surface: 'transparent',
+  surfaceAlt: 'rgba(13, 71, 161, 0.45)',
+  border: '#4fc3f7',
+  text: '#e8f6ff',
+  textMuted: '#90b4c8',
+  accent: '#80deea',
+  statHigh: '#5ef0c8',
+  statLow: '#ff8a80',
+  frameWidth: 5,
+  shadowColor: '#0d47a1',
+  ambient: 'ocean',
+};
+
 export const cardStyles: Record<CardStyleId, CardStylePreset> = {
   classic: classicCardStyle,
   crimson: crimsonCardStyle,
@@ -247,6 +325,10 @@ export const cardStyles: Record<CardStyleId, CardStylePreset> = {
   diamond: diamondCardStyle,
   matte: matteCardStyle,
   obsidian: obsidianCardStyle,
+  aurora: auroraCardStyle,
+  cosmic: cosmicCardStyle,
+  ember: emberCardStyle,
+  tide: tideCardStyle,
 };
 
 export function resolveCardStyle(
