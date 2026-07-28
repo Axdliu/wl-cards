@@ -16,7 +16,13 @@ export type CardStyleId =
   /** Chrome / platinum stock */
   | 'silver'
   /** Rainbow laser-holo frame (a.k.a. “laser” foil) */
-  | 'laser';
+  | 'laser'
+  /** Crystalline diamond / prism facets */
+  | 'diamond'
+  /** Soft velvet matte paper — no gloss */
+  | 'matte'
+  /** Deep black glass */
+  | 'obsidian';
 
 export const CARD_STYLE_IDS: CardStyleId[] = [
   'classic',
@@ -28,14 +34,18 @@ export const CARD_STYLE_IDS: CardStyleId[] = [
   'gold',
   'silver',
   'laser',
+  'diamond',
+  'matte',
+  'obsidian',
 ];
-
 
 export type CardStylePreset = CardTheme & {
   /** Outer frame thickness */
   frameWidth: number;
   /** Soft drop-shadow tint */
   shadowColor: string;
+  /** Foil / finish wash (Skia shader; CSS / bands fallback) */
+  metal?: 'gold' | 'silver' | 'laser' | 'diamond' | 'matte' | 'obsidian';
 };
 
 /** Cream stock + gold frame — classic TCG energy */
@@ -131,22 +141,23 @@ export const amberCardStyle: CardStylePreset = {
 /** Heavy gold foil — premium / chase card */
 export const goldCardStyle: CardStylePreset = {
   bg: '#f0d878',
-  surface: '#ffe566',
-  surfaceAlt: '#f5c842',
+  surface: '#f5e6a8',
+  surfaceAlt: '#e8d070',
   border: '#8b6914',
   text: '#2a1f05',
   textMuted: '#6b5420',
   accent: '#a67c00',
   statHigh: '#6b5a00',
   statLow: '#8b3a10',
-  frameWidth: 8,
+  frameWidth: 5,
   shadowColor: '#8b6914',
+  metal: 'gold',
 };
 
 /** Chrome silver — steel / uncommon metal */
 export const silverCardStyle: CardStylePreset = {
   bg: '#cfd6de',
-  surface: '#e8eef4',
+  surface: '#d8dee6',
   surfaceAlt: '#b8c2cc',
   border: '#5a6570',
   text: '#12161a',
@@ -154,14 +165,15 @@ export const silverCardStyle: CardStylePreset = {
   accent: '#4a5560',
   statHigh: '#2a6a5a',
   statLow: '#8a4040',
-  frameWidth: 8,
+  frameWidth: 5,
   shadowColor: '#3a4550',
+  metal: 'silver',
 };
 
 /** Laser / rainbow holographic frame */
 export const laserCardStyle: CardStylePreset = {
   bg: '#e0d4ff',
-  surface: '#f3ecff',
+  surface: '#ebe0ff',
   surfaceAlt: '#c9b0ff',
   border: '#ff00aa',
   text: '#1a0a33',
@@ -169,8 +181,57 @@ export const laserCardStyle: CardStylePreset = {
   accent: '#00e5ff',
   statHigh: '#00c4a0',
   statLow: '#ff4080',
-  frameWidth: 8,
+  frameWidth: 5,
   shadowColor: '#aa00ff',
+  metal: 'laser',
+};
+
+/** Ice-clear diamond — prism facets + sparkle */
+export const diamondCardStyle: CardStylePreset = {
+  bg: '#e8f0fa',
+  surface: '#f4f8fc',
+  surfaceAlt: '#d4e4f4',
+  border: '#7a9ec4',
+  text: '#142030',
+  textMuted: '#5a7088',
+  accent: '#5a8ab8',
+  statHigh: '#2a9a8a',
+  statLow: '#c45a7a',
+  frameWidth: 5,
+  shadowColor: '#6a88a8',
+  metal: 'diamond',
+};
+
+/** Soft matte paper — muted, no foil shine */
+export const matteCardStyle: CardStylePreset = {
+  bg: '#ddd6ca',
+  surface: '#e8e2d6',
+  surfaceAlt: '#cfc6b6',
+  border: '#8a7e6c',
+  text: '#2a2418',
+  textMuted: '#6a5e4e',
+  accent: '#7a6e5a',
+  statHigh: '#4a7a58',
+  statLow: '#9a5040',
+  frameWidth: 5,
+  shadowColor: '#5a5040',
+  metal: 'matte',
+};
+
+/** Obsidian glass — deep black with sharp specular */
+export const obsidianCardStyle: CardStylePreset = {
+  bg: '#1a1c22',
+  surface: '#242830',
+  surfaceAlt: '#16181e',
+  border: '#4a5568',
+  text: '#e8eef4',
+  textMuted: '#8b96a8',
+  accent: '#7a90b0',
+  statHigh: '#5ab89a',
+  statLow: '#c45c6c',
+  frameWidth: 5,
+  shadowColor: '#000000',
+  metal: 'obsidian',
 };
 
 export const cardStyles: Record<CardStyleId, CardStylePreset> = {
@@ -183,6 +244,9 @@ export const cardStyles: Record<CardStyleId, CardStylePreset> = {
   gold: goldCardStyle,
   silver: silverCardStyle,
   laser: laserCardStyle,
+  diamond: diamondCardStyle,
+  matte: matteCardStyle,
+  obsidian: obsidianCardStyle,
 };
 
 export function resolveCardStyle(

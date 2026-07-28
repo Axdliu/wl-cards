@@ -1,6 +1,6 @@
 # worldline-card
 
-Open-source **React Native** components for **collectible / trading-card** UIs on phone — framed stat cards, composable slots, **touch tilt**, and **holo shine** (Reanimated + Gesture Handler).
+Open-source **React Native** components for **collectible / trading-card** UIs on phone — framed stat cards, composable slots, **touch tilt**, and **holo / metal foil** (Reanimated + Gesture Handler + optional Skia shaders).
 
 Inspired by TCG-style web frameworks and the character card UI from [Worldline](https://github.com/worldline-dev/worldline-app), packaged so any app can drop in polished cards without game-specific logic.
 
@@ -10,17 +10,18 @@ Inspired by TCG-style web frameworks and the character card UI from [Worldline](
 - **`CollectibleCard` + `CardParts`** — compose headers, art, chips, stat bars, footers yourself
 - **`TiltCard`** — drag to tilt in 3D; optional **`CardHoloOverlay`** (`common` | `rare` | `legendary`)
 - **`CardThemeProvider`** — dark theme defaults; override colors to match your app
-- **`cardStyle`** — physical TCG looks: `classic` | `crimson` | `forest` | `royal` | `ocean` | `amber` | `gold` | `silver` | `laser`
+- **`cardStyle`** — physical TCG looks: `classic` | `crimson` | `forest` | `royal` | `ocean` | `amber` | `gold` | `silver` | `laser` | `diamond` | `matte` | `obsidian`
+- **Foil finishes** — Skia RuntimeEffect shaders for metal / crystal / matte / glass (falls back to CSS gradients). Optional `metalTexture` image shade when you have foil assets.
 
-No Skia, no WebView — pure RN views, friendly to Expo.
+Skia is an **optional** peer — install `@shopify/react-native-skia` for shader metals; without it, CSS / view fallbacks still work. No WebView.
 
 ## Install
 
 ```bash
-pnpm add worldline-card react-native-reanimated react-native-gesture-handler
+pnpm add worldline-card react-native-reanimated react-native-gesture-handler @shopify/react-native-skia
 ```
 
-Peer dependencies: `react`, `react-native`, `react-native-reanimated`, `react-native-gesture-handler`.
+Peer dependencies: `react`, `react-native`, `react-native-reanimated`, `react-native-gesture-handler`. Optional: `@shopify/react-native-skia` (metal shaders).
 
 Expo: enable Reanimated in `babel.config.js`:
 
@@ -73,6 +74,17 @@ export function MyScreen() {
 ```
 
 Pass a single localized `title` from the caller (e.g. `"蜘蛛侠"` or `"Spider-Man"`). Optional `subtitle` is for a secondary line like a role or epithet — not a second language.
+
+Metal styles (`cardStyle="gold" | "silver" | "laser" | "diamond" | "matte" | "obsidian"`) drive a Skia foil wash that tracks tilt. Shade with a real texture when you have one:
+
+```tsx
+<StatCollectibleCard
+  cardStyle="gold"
+  metalTexture={require('./assets/foil-gold.png')}
+  /* ... */
+/>
+```
+
 ## Compose your own
 
 ```tsx

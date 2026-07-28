@@ -10,6 +10,7 @@ import Animated, {
   withSpring,
 } from 'react-native-reanimated';
 import { CardHoloOverlay } from './CardHoloOverlay';
+import { MetalTiltProvider } from './MetalTiltContext';
 import type { HoloVariant, TiltConfig } from '../theme/types';
 
 export type TiltCardProps = {
@@ -168,14 +169,16 @@ export function TiltCard({
         }}
       >
         <View style={styles.inner} collapsable={false}>
-          {children}
-          {holoVariant !== 'none' ? (
-            <CardHoloOverlay
-              variant={holoVariant}
-              tiltX={tiltX}
-              tiltY={tiltY}
-            />
-          ) : null}
+          <MetalTiltProvider tiltX={tiltX} tiltY={tiltY}>
+            {children}
+            {holoVariant !== 'none' ? (
+              <CardHoloOverlay
+                variant={holoVariant}
+                tiltX={tiltX}
+                tiltY={tiltY}
+              />
+            ) : null}
+          </MetalTiltProvider>
         </View>
       </Animated.View>
     </GestureDetector>

@@ -11,6 +11,8 @@ export type CardTheme = {
   /** Outer frame thickness (physical card feel). Default 2 */
   frameWidth?: number;
   shadowColor?: string;
+  /** When set, CollectibleCard paints a foil / finish wash */
+  metal?: 'gold' | 'silver' | 'laser' | 'diamond' | 'matte' | 'obsidian';
 };
 
 /** Default app chrome stays dark; individual cards should prefer a `cardStyle`. */

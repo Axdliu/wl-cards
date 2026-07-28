@@ -3,11 +3,13 @@ import {
   Pressable,
   StyleSheet,
   View,
+  type ImageSourcePropType,
   type StyleProp,
   type ViewStyle,
 } from 'react-native';
 import { useCardTheme } from '../theme/CardThemeContext';
 import { CardExplainHost } from './CardExplain';
+import { CardMetalOverlay, type MetalKind } from './CardMetalOverlay';
 
 export type CollectibleCardProps = {
   children: React.ReactNode;
@@ -19,6 +21,12 @@ export type CollectibleCardProps = {
   style?: StyleProp<ViewStyle>;
   /** Skip outer margin — use when nested inside TiltCard */
   bare?: boolean;
+  /**
+   * Force a metal foil wash. If omitted, uses `theme.metal` from the active card style.
+   */
+  metal?: MetalKind | null;
+  /** Optional foil texture image used as a shade over the card */
+  metalTexture?: ImageSourcePropType;
   testID?: string;
 };
 
@@ -30,10 +38,14 @@ export function CollectibleCard({
   onPress,
   style,
   bare = false,
+  metal,
+  metalTexture,
   testID,
 }: CollectibleCardProps) {
   const theme = useCardTheme();
   const frameWidth = theme.frameWidth ?? 2;
+  const metalKind =
+    metal === null ? undefined : (metal ?? (theme as { metal?: MetalKind }).metal);
 
   const cardStyle = [
     styles.card,
@@ -50,7 +62,12 @@ export function CollectibleCard({
 
   const inner = (
     <View style={cardStyle} testID={testID}>
-      <CardExplainHost>{children}</CardExplainHost>
+      {metalKind ? (
+        <CardMetalOverlay kind={metalKind} texture={metalTexture} />
+      ) : null}
+      <View style={styles.content}>
+        <CardExplainHost>{children}</CardExplainHost>
+      </View>
     </View>
   );
 
@@ -94,5 +111,9 @@ const styles = StyleSheet.create({
   cardHighlighted: {
     shadowOpacity: 0.4,
     shadowRadius: 16,
+  },
+  content: {
+    position: 'relative',
+    zIndex: 1,
   },
 });

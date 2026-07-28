@@ -16,6 +16,11 @@ const ART = {
   ash: require('./assets/cards/ash.png'),
 };
 
+const METAL = {
+  gold: require('./assets/metal/brushed-gold.jpg'),
+  glitter: require('./assets/metal/glitter-foil.jpg'),
+};
+
 const SPIDER_STATS: CardStat[] = [
   {
     label: 'Insight',
@@ -121,7 +126,9 @@ export function DemoGallery({ compactChrome = false }: DemoGalleryProps) {
 
         <Text style={styles.section}>Card styles</Text>
         <StatCollectibleCard
+          interactive
           cardStyle="gold"
+          metalTexture={METAL.gold}
           title="Sun Tzu"
           artSource={ART.suntzu}
           badge={{
@@ -162,7 +169,8 @@ export function DemoGallery({ compactChrome = false }: DemoGalleryProps) {
         />
 
         <StatCollectibleCard
-          cardStyle="forest"
+          interactive
+          cardStyle="matte"
           title="Link"
           artSource={ART.link}
           badge={{ label: 'Game', color: '#2a5f54' }}
@@ -174,10 +182,12 @@ export function DemoGallery({ compactChrome = false }: DemoGalleryProps) {
             { label: 'Composure', value: 7 },
           ]}
           flavor="It's dangerous to go alone."
-          footerLeft="STYLE · FOREST"
+          footerLeft="STYLE · MATTE"
         />
         <StatCollectibleCard
-          cardStyle="silver"
+          interactive
+          cardStyle="laser"
+          metalTexture={METAL.glitter}
           title="Hermione"
           artSource={ART.hermione}
           badge={{ label: 'Film', color: '#5c4a6e' }}
@@ -188,10 +198,11 @@ export function DemoGallery({ compactChrome = false }: DemoGalleryProps) {
             { label: 'Strategy', value: 8 },
             { label: 'Charisma', value: 6 },
           ]}
-          footerLeft="STYLE · SILVER"
+          footerLeft="STYLE · LASER"
         />
         <StatCollectibleCard
-          cardStyle="laser"
+          interactive
+          cardStyle="diamond"
           title="Ada"
           artSource={ART.ada}
           badge={{ label: 'Science', color: '#2a6f8f' }}
@@ -209,10 +220,11 @@ export function DemoGallery({ compactChrome = false }: DemoGalleryProps) {
             { label: 'Charisma', value: 6 },
           ]}
           flavor="The Analytical Engine weaves algebraic patterns."
-          footerLeft="STYLE · LASER"
+          footerLeft="STYLE · DIAMOND"
         />
         <StatCollectibleCard
-          cardStyle="classic"
+          interactive
+          cardStyle="obsidian"
           title="Ash"
           artSource={ART.ash}
           badge={{ label: 'Anime', color: '#c9a227' }}
@@ -224,7 +236,7 @@ export function DemoGallery({ compactChrome = false }: DemoGalleryProps) {
             { label: 'Composure', value: 4 },
           ]}
           flavor="I wanna be the very best."
-          footerLeft="STYLE · CLASSIC"
+          footerLeft="STYLE · OBSIDIAN"
         />
       </ScrollView>
     </View>

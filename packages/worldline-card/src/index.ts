@@ -25,7 +25,8 @@ export type { CardStatBarProps, CardStatListProps } from './components/CardStatB
 export { CardExplainHost, useCardExplain } from './components/CardExplain';
 export type { CardExplainPayload } from './components/CardExplain';
 
-export { CardHoloOverlay } from './components/CardHoloOverlay';
+export { CardMetalOverlay } from './components/CardMetalOverlay';
+export type { MetalKind } from './components/CardMetalOverlay';
 
 export { TiltCard } from './components/TiltCard';
 export type { TiltCardProps } from './components/TiltCard';
@@ -48,6 +49,9 @@ export {
   goldCardStyle,
   silverCardStyle,
   laserCardStyle,
+  diamondCardStyle,
+  matteCardStyle,
+  obsidianCardStyle,
   resolveCardStyle,
 } from './theme/cardStyles';
 export type { CardStyleId, CardStylePreset } from './theme/cardStyles';

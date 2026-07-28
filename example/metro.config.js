@@ -12,6 +12,14 @@ config.watchFolders = [workspaceRoot];
 config.resolver.nodeModulesPaths = [
   path.resolve(projectRoot, 'node_modules'),
   path.resolve(workspaceRoot, 'node_modules'),
+  path.resolve(workspaceRoot, 'packages/worldline-card/node_modules'),
 ];
+config.resolver.extraNodeModules = {
+  ...(config.resolver.extraNodeModules ?? {}),
+  '@shopify/react-native-skia': path.resolve(
+    projectRoot,
+    'node_modules/@shopify/react-native-skia'
+  ),
+};
 
 module.exports = config;

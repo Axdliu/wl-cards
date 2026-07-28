@@ -51,6 +51,8 @@ export type StatCollectibleCardProps = {
    * Overrides the ambient CardTheme for this card only.
    */
   cardStyle?: CardStyleId;
+  /** Optional foil texture image — shades gold/silver/laser for a real-metal look */
+  metalTexture?: ImageSourcePropType;
   /** Wrap with touch tilt + holo overlay */
   interactive?: boolean;
   holo?: HoloVariant;
@@ -77,6 +79,7 @@ export function StatCollectibleCard({
   active = false,
   selected = false,
   cardStyle = 'classic',
+  metalTexture,
   interactive = false,
   holo = 'rare',
   onPress,
@@ -92,6 +95,7 @@ export function StatCollectibleCard({
       selected={selected}
       bare={interactive}
       onPress={interactive ? undefined : onPress}
+      metalTexture={metalTexture}
     >
       <CardHeader
         badge={badge}
@@ -144,7 +148,7 @@ export function StatCollectibleCard({
 
   return (
     <View style={styles.interactiveWrap}>
-      <TiltCard holo={holo} onPress={onPress} disabled={!onPress && holo === 'none'}>
+      <TiltCard holo={holo} onPress={onPress}>
         {themed}
       </TiltCard>
     </View>
