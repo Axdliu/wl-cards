@@ -45,6 +45,9 @@ export {
   royalCardStyle,
   oceanCardStyle,
   amberCardStyle,
+  goldCardStyle,
+  silverCardStyle,
+  laserCardStyle,
   resolveCardStyle,
 } from './theme/cardStyles';
 export type { CardStyleId, CardStylePreset } from './theme/cardStyles';

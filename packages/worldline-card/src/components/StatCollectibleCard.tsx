@@ -46,7 +46,8 @@ export type StatCollectibleCardProps = {
   active?: boolean;
   selected?: boolean;
   /**
-   * Physical trading-card look (`classic` | `crimson` | `forest` | `royal` | `ocean` | `amber`).
+   * Physical trading-card look (`classic` | `crimson` | `forest` | `royal` |
+   * `ocean` | `amber` | `gold` | `silver` | `laser`).
    * Overrides the ambient CardTheme for this card only.
    */
   cardStyle?: CardStyleId;

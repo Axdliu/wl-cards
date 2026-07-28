@@ -10,7 +10,7 @@ Inspired by TCG-style web frameworks and the character card UI from [Worldline](
 - **`CollectibleCard` + `CardParts`** — compose headers, art, chips, stat bars, footers yourself
 - **`TiltCard`** — drag to tilt in 3D; optional **`CardHoloOverlay`** (`common` | `rare` | `legendary`)
 - **`CardThemeProvider`** — dark theme defaults; override colors to match your app
-- **`cardStyle`** — physical TCG looks: `classic` | `crimson` | `forest` | `royal` | `ocean` | `amber`
+- **`cardStyle`** — physical TCG looks: `classic` | `crimson` | `forest` | `royal` | `ocean` | `amber` | `gold` | `silver` | `laser`
 
 No Skia, no WebView — pure RN views, friendly to Expo.
 

@@ -109,7 +109,7 @@ export function WebDemoPage() {
           </Text>
           <Text style={styles.lede}>
             Drop framed stat cards into Expo or RN apps. No Skia, no WebView —
-            drag the legendary card in the phone to feel the holo.
+            drag the first card in the phone to try the optional foil tilt.
           </Text>
 
           <View style={styles.actions}>

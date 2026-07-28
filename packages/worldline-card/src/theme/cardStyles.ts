@@ -10,7 +10,13 @@ export type CardStyleId =
   | 'forest'
   | 'royal'
   | 'ocean'
-  | 'amber';
+  | 'amber'
+  /** Metallic gold foil stock */
+  | 'gold'
+  /** Chrome / platinum stock */
+  | 'silver'
+  /** Rainbow laser-holo frame (a.k.a. “laser” foil) */
+  | 'laser';
 
 export const CARD_STYLE_IDS: CardStyleId[] = [
   'classic',
@@ -19,7 +25,11 @@ export const CARD_STYLE_IDS: CardStyleId[] = [
   'royal',
   'ocean',
   'amber',
+  'gold',
+  'silver',
+  'laser',
 ];
+
 
 export type CardStylePreset = CardTheme & {
   /** Outer frame thickness */
@@ -118,6 +128,51 @@ export const amberCardStyle: CardStylePreset = {
   shadowColor: '#6e5320',
 };
 
+/** Heavy gold foil — premium / chase card */
+export const goldCardStyle: CardStylePreset = {
+  bg: '#f0d878',
+  surface: '#ffe566',
+  surfaceAlt: '#f5c842',
+  border: '#8b6914',
+  text: '#2a1f05',
+  textMuted: '#6b5420',
+  accent: '#a67c00',
+  statHigh: '#6b5a00',
+  statLow: '#8b3a10',
+  frameWidth: 8,
+  shadowColor: '#8b6914',
+};
+
+/** Chrome silver — steel / uncommon metal */
+export const silverCardStyle: CardStylePreset = {
+  bg: '#cfd6de',
+  surface: '#e8eef4',
+  surfaceAlt: '#b8c2cc',
+  border: '#5a6570',
+  text: '#12161a',
+  textMuted: '#4a5560',
+  accent: '#4a5560',
+  statHigh: '#2a6a5a',
+  statLow: '#8a4040',
+  frameWidth: 8,
+  shadowColor: '#3a4550',
+};
+
+/** Laser / rainbow holographic frame */
+export const laserCardStyle: CardStylePreset = {
+  bg: '#e0d4ff',
+  surface: '#f3ecff',
+  surfaceAlt: '#c9b0ff',
+  border: '#ff00aa',
+  text: '#1a0a33',
+  textMuted: '#5a4080',
+  accent: '#00e5ff',
+  statHigh: '#00c4a0',
+  statLow: '#ff4080',
+  frameWidth: 8,
+  shadowColor: '#aa00ff',
+};
+
 export const cardStyles: Record<CardStyleId, CardStylePreset> = {
   classic: classicCardStyle,
   crimson: crimsonCardStyle,
@@ -125,6 +180,9 @@ export const cardStyles: Record<CardStyleId, CardStylePreset> = {
   royal: royalCardStyle,
   ocean: oceanCardStyle,
   amber: amberCardStyle,
+  gold: goldCardStyle,
+  silver: silverCardStyle,
+  laser: laserCardStyle,
 };
 
 export function resolveCardStyle(

@@ -87,11 +87,11 @@ export function DemoGallery({ compactChrome = false }: DemoGalleryProps) {
           </Text>
           <Text style={styles.subheading}>
             Tap a dotted trait or underlined stat for an explanation. Drag the
-            foil card to tilt.
+            first card to try the foil shine.
           </Text>
         </>
       ) : (
-        <Text style={styles.hint}>Tap stats / traits · drag foil to tilt</Text>
+        <Text style={styles.hint}>Tap stats / traits · foil on first card</Text>
       )}
 
       <ScrollView
@@ -121,9 +121,7 @@ export function DemoGallery({ compactChrome = false }: DemoGalleryProps) {
 
         <Text style={styles.section}>Card styles</Text>
         <StatCollectibleCard
-          interactive
-          holo="rare"
-          cardStyle="amber"
+          cardStyle="gold"
           title="Sun Tzu"
           artSource={ART.suntzu}
           badge={{
@@ -160,12 +158,10 @@ export function DemoGallery({ compactChrome = false }: DemoGalleryProps) {
             },
           ]}
           flavor="Victory is decided before the battle is fought."
-          footerLeft="Expr 4/10"
+          footerLeft="STYLE · GOLD"
         />
 
         <StatCollectibleCard
-          interactive
-          holo="rare"
           cardStyle="forest"
           title="Link"
           artSource={ART.link}
@@ -178,11 +174,10 @@ export function DemoGallery({ compactChrome = false }: DemoGalleryProps) {
             { label: 'Composure', value: 7 },
           ]}
           flavor="It's dangerous to go alone."
+          footerLeft="STYLE · FOREST"
         />
         <StatCollectibleCard
-          interactive
-          holo="legendary"
-          cardStyle="royal"
+          cardStyle="silver"
           title="Hermione"
           artSource={ART.hermione}
           badge={{ label: 'Film', color: '#5c4a6e' }}
@@ -193,11 +188,10 @@ export function DemoGallery({ compactChrome = false }: DemoGalleryProps) {
             { label: 'Strategy', value: 8 },
             { label: 'Charisma', value: 6 },
           ]}
+          footerLeft="STYLE · SILVER"
         />
         <StatCollectibleCard
-          interactive
-          holo="common"
-          cardStyle="ocean"
+          cardStyle="laser"
           title="Ada"
           artSource={ART.ada}
           badge={{ label: 'Science', color: '#2a6f8f' }}
@@ -215,11 +209,9 @@ export function DemoGallery({ compactChrome = false }: DemoGalleryProps) {
             { label: 'Charisma', value: 6 },
           ]}
           flavor="The Analytical Engine weaves algebraic patterns."
-          footerLeft="Expr 9/10"
+          footerLeft="STYLE · LASER"
         />
         <StatCollectibleCard
-          interactive
-          holo="rare"
           cardStyle="classic"
           title="Ash"
           artSource={ART.ash}
@@ -232,7 +224,7 @@ export function DemoGallery({ compactChrome = false }: DemoGalleryProps) {
             { label: 'Composure', value: 4 },
           ]}
           flavor="I wanna be the very best."
-          footerLeft="Expr 5/10"
+          footerLeft="STYLE · CLASSIC"
         />
       </ScrollView>
     </View>

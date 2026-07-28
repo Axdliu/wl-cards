@@ -3,6 +3,7 @@ import { StyleSheet, View, type StyleProp, type ViewStyle } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, {
   cancelAnimation,
+  interpolate,
   runOnJS,
   useAnimatedStyle,
   useSharedValue,
@@ -23,7 +24,16 @@ export type TiltCardProps = {
   onPress?: () => void;
 };
 
-const springConfig = { damping: 18, stiffness: 220, mass: 0.45 };
+/** Soft settle — like a card returning to the table */
+const settleSpring = { damping: 16, stiffness: 140, mass: 0.85 };
+const pressSpring = { damping: 20, stiffness: 260, mass: 0.4 };
+
+/** Ease toward extremes so edges don’t feel clipped */
+function curveAxis(v: number) {
+  'worklet';
+  const clamped = Math.max(-1, Math.min(1, v));
+  return Math.sin((clamped * Math.PI) / 2);
+}
 
 export function TiltCard({
   children,
@@ -35,7 +45,7 @@ export function TiltCard({
   tilt,
   onPress,
 }: TiltCardProps) {
-  const maxTilt = tilt?.maxTilt ?? 14;
+  const maxTilt = tilt?.maxTilt ?? 18;
   const resetOnRelease = tilt?.resetOnRelease ?? true;
   const holoVariant = holo;
 
@@ -50,10 +60,11 @@ export function TiltCard({
     'worklet';
     const w = Math.max(layoutW.value, 1);
     const h = Math.max(layoutH.value, 1);
+    // Finger position → light/tilt; slight bias so center feels stable
     const nx = (x / w) * 2 - 1;
     const ny = (y / h) * 2 - 1;
-    tiltX.value = Math.max(-1, Math.min(1, nx));
-    tiltY.value = Math.max(-1, Math.min(1, -ny));
+    tiltX.value = curveAxis(nx);
+    tiltY.value = curveAxis(-ny);
   };
 
   const resetTilt = () => {
@@ -62,39 +73,47 @@ export function TiltCard({
     cancelAnimation(tiltX);
     cancelAnimation(tiltY);
     cancelAnimation(press);
-    press.value = withSpring(0, springConfig);
+    press.value = withSpring(0, pressSpring);
     if (resetOnRelease) {
-      tiltX.value = withSpring(0, springConfig);
-      tiltY.value = withSpring(0, springConfig);
+      tiltX.value = withSpring(0, settleSpring);
+      tiltY.value = withSpring(0, settleSpring);
     }
   };
 
-  // Pan only activates after a short drag so ScrollView can still scroll,
-  // and we never leave tilt applied from a cancelled touch-down.
   const pan = Gesture.Pan()
     .enabled(!disabled)
     .maxPointers(1)
-    .activeOffsetX([-8, 8])
-    .activeOffsetY([-8, 8])
+    .activeOffsetX([-6, 6])
+    .activeOffsetY([-6, 6])
     .onStart((e) => {
       dragging.value = 1;
       cancelAnimation(tiltX);
       cancelAnimation(tiltY);
-      press.value = withSpring(1, springConfig);
+      press.value = withSpring(1, pressSpring);
       applyTilt(e.x, e.y);
     })
     .onUpdate((e) => {
       applyTilt(e.x, e.y);
     })
-    .onEnd(() => {
+    .onEnd((e) => {
+      // Tiny inertia kick from finger velocity, then settle flat
+      if (resetOnRelease) {
+        const kickX = Math.max(-0.35, Math.min(0.35, e.velocityX / 2400));
+        const kickY = Math.max(-0.35, Math.min(0.35, -e.velocityY / 2400));
+        tiltX.value = tiltX.value + kickX;
+        tiltY.value = tiltY.value + kickY;
+      }
       resetTilt();
     })
     .onFinalize(() => {
-      // Always snap back — covers ScrollView cancelling the gesture mid-drag
-      if (dragging.value === 1 || Math.abs(tiltX.value) > 0.01 || Math.abs(tiltY.value) > 0.01) {
+      if (
+        dragging.value === 1 ||
+        Math.abs(tiltX.value) > 0.01 ||
+        Math.abs(tiltY.value) > 0.01
+      ) {
         resetTilt();
       } else {
-        press.value = withSpring(0, springConfig);
+        press.value = withSpring(0, pressSpring);
       }
     });
 
@@ -111,16 +130,30 @@ export function TiltCard({
   const gesture = tap != null ? Gesture.Exclusive(pan, tap) : pan;
 
   const cardMotion = useAnimatedStyle(() => {
+    const motion =
+      Math.min(1, Math.abs(tiltX.value) + Math.abs(tiltY.value)) * 0.5 +
+      press.value * 0.5;
     const rotateY = tiltX.value * maxTilt;
     const rotateX = tiltY.value * maxTilt;
-    const scale = 1 - press.value * 0.02;
+    // Slight twist when cornering — real cards don’t rotate on one axis only
+    const rotateZ = tiltX.value * tiltY.value * -4;
+    const liftY = interpolate(motion, [0, 1], [0, -6]);
+    const scale = interpolate(motion, [0, 1], [1, 1.035]);
     return {
       transform: [
-        { perspective: 1100 },
+        { perspective: 900 },
+        { translateY: liftY },
         { rotateX: `${rotateX}deg` },
         { rotateY: `${rotateY}deg` },
+        { rotateZ: `${rotateZ}deg` },
         { scale },
       ],
+      shadowOpacity: interpolate(motion, [0, 1], [0.22, 0.42]),
+      shadowRadius: interpolate(motion, [0, 1], [10, 22]),
+      shadowOffset: {
+        width: interpolate(tiltX.value, [-1, 1], [14, -14]),
+        height: interpolate(tiltY.value, [-1, 1], [4, 18]),
+      },
     };
   });
 
@@ -152,9 +185,10 @@ export function TiltCard({
 const styles = StyleSheet.create({
   wrap: {
     alignSelf: 'stretch',
+    shadowColor: '#000',
   },
   inner: {
     overflow: 'hidden',
-    borderRadius: 16,
+    borderRadius: 14,
   },
 });
